@@ -1,126 +1,70 @@
 #include <iostream>
-
 using namespace std;
 
 void calc(float op1, char op, float op2) {
     float result;
 
-    while (op != '=')
-    {
-        if (op == '+')
-        {
-            result = op1+op2;
-            cout<<result<<" ";
-            op1=result;
-            cin>>op;
-
-            if (op == 'c')
-            {
-                cin>>op1;
-                cin>>op;
-                cin>>op2;   
-
-                calc(op1, op, op2);
+    while (true) {
+        if (op == '+') {
+            result = op1 + op2;
+        } 
+        
+        else if (op == '-') {
+            result = op1 - op2;
+        } 
+        
+        else if (op == '*') {
+            result = op1 * op2;
+        } 
+        
+        else if (op == '/') {
+            if (op2 == 0) {
+                cout<<"Error! Can't divide by 0"<<endl;
+                return;
             }
-
-            else if (op == 'e'){
-                break;
-            }
-            
-            else
-            {cin>>op2;}
+            result = op1 / op2;
+        } 
+        
+        else {
+            cout<<"Invalid operator"<<endl;
+            return;
         }
 
-        else if (op == '-')
-        {
-            result = op1-op2;
-            cout<<result<<" ";
-            op1=result;
+        cout<<result;
+        op1 = result;
+        cin >> op;
+
+        if (op == 'c') {
+            cout<<"starting new operation"<<endl;
+            cin>>op1;
             cin>>op;
-            
-            if (op == 'c')
-            {
-                cin>>op1;
-                cin>>op;
-                cin>>op2;   
-
-                calc(op1, op, op2);
-            }
-
-            else if (op == 'e'){
-                break;
-            }
-            
-            else
-            {cin>>op2;}
-        }
-
-        else if (op == '*')
-        {
-            result = op1*op2;
-            cout<<result<<" ";
-            op1=result;
-            cin>>op;
-
-            if (op == 'c')
-            {
-                cin>>op1;
-                cin>>op;
-                cin>>op2;   
-
-                calc(op1, op, op2);
-            }
-
-            else if (op == 'e'){
-                break;
-            }
-            
-            else
-            {cin>>op2;}
-        }
-
-        else if (op == '/')
-        {
-            result = op1/op2;
-            cout<<result<<" ";
-            op1=result;
-            cin>>op;
-            
-            if (op == 'c')
-            {
-                cin>>op1;
-                cin>>op;
-                cin>>op2;   
-
-                calc(op1, op, op2);
-            }
-
-            else if (op == 'e'){
-                break;
-            }
-            
-            else
-            {cin>>op2;}
+            cin>>op2;
+        } 
+        
+        else if (op == 'e') {
+            cout << "\nExiting...\n";
+            break;
+        } 
+        
+        else {
+            cin >> op2;
         }
     }
 }
 
-int main () {
-
+int main() {
     float op1, op2;
-    float result;
-
     char op;
 
-    cout<<"This is a simple calculator"<<endl;
-    cout<<"use operators +, -, *, /"<<endl;
-    cout<<"enter 'e' to end operations"<<endl;
+    cout << "This is a simple calculator\n";
+    cout << "Use operators +, -, *, /\n";
+    cout << "Enter 'c' to start new operation; 'e' to end operations\n";
+    cout << "Enter first operation:\n";
 
     cin>>op1;
     cin>>op;
     cin>>op2;
+    calc(op1, op, op2);
 
-    calc(op1,op, op2);
-    
     return 0;
 }
